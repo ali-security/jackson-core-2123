@@ -12,14 +12,14 @@ permissions:
 jobs:
   trigger-dep-build-v3:
     name: Trigger downstream builds
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     strategy:
       fail-fast: false
       matrix:
         repo:
-          - 'FasterXML/jackson-databind'
-          - 'FasterXML/jackson-jr'
+          - FasterXML/jackson-databind
+          - FasterXML/jackson-jr
 
     steps:
       - name: Repository dispatch

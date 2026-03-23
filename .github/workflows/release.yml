@@ -20,9 +20,9 @@ permissions:
 
 jobs:
   release:
-    runs-on: "ubuntu-24.04"
+    runs-on: ubuntu-24.04
     env:
-      JAVA_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+      JAVA_OPTS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       TAG: ${{ github.ref_name }}
     outputs:
       hash: ${{ steps.hash.outputs.hash }}
@@ -35,9 +35,9 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
         with:
-          distribution: "temurin"
-          java-version: "8"
-          cache: "maven"
+          distribution: temurin
+          java-version: '8'
+          cache: maven
           server-id: sonatype-nexus-staging
           server-username: CI_DEPLOY_USERNAME
           server-password: CI_DEPLOY_PASSWORD
@@ -80,6 +80,6 @@ jobs:
       contents: write # To add assets to a release.
     uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v2.1.0
     with:
-      base64-subjects: "${{ needs.release.outputs.hash }}"
-      provenance-name: "${{ needs.release.outputs.artifact_name }}.jar.intoto.jsonl"
+      base64-subjects: ${{ needs.release.outputs.hash }}
+      provenance-name: ${{ needs.release.outputs.artifact_name }}.jar.intoto.jsonl
       upload-assets: true # Optional: Upload to a new release
